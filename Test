@@ -1,1 +1,61 @@
 Test remote git
+
+ try(Connection con = DriverManager.getConnection(URL, USER, PASSWORD);){
+
+            Statement statement = con.createStatement();
+            statement.execute("DROP SCHEMA `test`");
+            statement.execute("CREATE SCHEMA `test`");
+            statement.execute("CREATE TABLE `test` . `table`" +
+                    "(`id` INT NOT NULL, `firstname` VARCHAR(45) NULL, " +
+                    " `lastname` VARCHAR(45) NULL, PRIMARY KEY(`id`))");
+            statement.execute("INSERT INTO `test`. `table` (`id`,`firstname`,`lastname`)\n" +
+                    "VALUES (1,'Ivanov','Ivan');");
+            statement.execute("INSERT INTO `test`. `table` (`id`,`firstname`,`lastname`)\n" +
+                    "VALUES (2,'Petrov','Ivan');");
+            statement.execute("INSERT INTO `test`. `table` (`id`,`firstname`,`lastname`)\n" +
+                    "VALUES (3,'Petrov','Petr');");
+            statement.execute("INSERT INTO `test`. `table` (`id`,`firstname`,`lastname`)\n" +
+                    "VALUES (4,'Chebaksarov','Vasy');");
+            statement.execute("INSERT INTO `test`. `table` (`id`,`firstname`,`lastname`)\n" +
+                    "VALUES (5,'Parker','Peter');");
+
+            ResultSet set = statement.executeQuery("SELECT * FROM test.table;");
+            while(set.next()){
+                System.out.println(set.getString(3)+" "+set.getString(2)+" " + set.getInt(1));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+
+  StandardServiceRegistryBuilder standardServiceRegistryBuilder = new StandardServiceRegistryBuilder();
+        standardServiceRegistryBuilder.configure();
+        final StandardServiceRegistry registry = standardServiceRegistryBuilder
+               .build();
+        SessionFactory sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        Magic magic = new Magic("Magic country",10,0);
+        session.beginTransaction();
+        session.save(magic);
+        session.getTransaction().commit();
+        session.close();
+
+
+          Magic magic = new Magic("Magic country",10,0,0);
+              session.beginTransaction().commit();
+              session.save(magic);
+                magic = new Magic("Magic palka",10,12,0);
+                session.beginTransaction().commit();
+                session.save(magic);
+                magic = new Magic("Magic f",9,3,1);
+                session.beginTransaction().commit();
+                session.save(magic);
+                magic = new Magic("Magic f",10,40,1);
+                session.beginTransaction().commit();
+                session.save(magic);
+                magic = new Magic("Magic b",10,0,0);
+                session.beginTransaction().commit();
+                session.save(magic);
+
