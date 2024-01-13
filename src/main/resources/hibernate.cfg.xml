@@ -10,7 +10,6 @@
         <property name = "hibernate.connection.username">root</property>
         <property name = "hibernate.connection.password">Admin1886!</property>
         <!-- List of XML mapping files -->
-        <mapping class="project.Magic"/>
-
+        <mapping class="home.Book"/>
     </session-factory>
 </hibernate-configuration>
